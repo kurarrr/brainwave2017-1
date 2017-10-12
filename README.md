@@ -1,2 +1,2 @@
-# brainwave2017-1
+# brainwave2017-3
 Brain Machine Interface class
