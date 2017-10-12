@@ -2,3 +2,4 @@
 Brain Machine Interface class
 ##メンバー
 - Ryota Yonekura
+- Takeshi Kaneko
