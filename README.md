@@ -2,7 +2,7 @@
 Brain Machine Interface class
 
 
-##メンバー
+## メンバー
 
 - Ryota Yonekura(kurarrr)
 - Takeshi Kaneko thishi1371 03-170980
