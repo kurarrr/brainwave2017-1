@@ -24,7 +24,7 @@ void setup(){
   system = new GameSystem();
   oscListener = new OscListener();
   smooth();
-  outfile = createWriter("pos_t.txt");
+  outfile = createWriter("pos_t2.txt");
 }
 
 void draw(){
