@@ -32,10 +32,12 @@ final class OscListener{
     if(msg.checkAddrPattern("/muse/elements/alpha_relative")){
       for(int ch = 0; ch < N_CHANNELS; ch++){
         data = msg.get(ch).floatValue();
+        outfile.print(data+" ");
         //data = (data - (MAX_MICROVOLTS / 2)) / (MAX_MICROVOLTS / 2); // -1.0 1.0
         //println(data);
         buffer[ch][pointer] = data;
       }
+      outfile.println("");
       pointer = (pointer + 1) % BUFFER_SIZE;
     }    
   }
@@ -43,6 +45,7 @@ final class OscListener{
   void draw(){
     //デバッグ用
     //脳波の描画が必要なときに呼ぶ
+    
    float x1, y1, x2, y2;
     background(BG_COLOR);
     for(int ch = 0; ch < N_CHANNELS; ch++){

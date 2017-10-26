@@ -1,8 +1,11 @@
 void keyPressed(){
   //キーが入力されたとき
-  if(currentKeyInput.lastkey != key){
-    System.out.println("pressing "+key);
-  }
+  //if(currentKeyInput.lastkey != key){
+  //  System.out.println("pressing "+key);
+  //}
+  outfile.flush(); 
+  outfile.close(); 
+  exit();
   
   currentKeyInput.lastkey = key;
 }
