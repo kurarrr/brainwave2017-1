@@ -17,8 +17,8 @@ final int PORT = 5000;
 OscP5 oscP5 = new OscP5(this, PORT);
 
 void setup(){
-  size(1000, 600);
-  frameRate(30);
+  size(1000, 600,P3D);
+  //frameRate(30);
   currentKeyInput = new KeyInput();
   system = new GameSystem();
   oscListener = new OscListener();
@@ -27,7 +27,7 @@ void setup(){
 
 void draw(){
   system.run();
-  if(DEBUG){
-    oscListener.draw();
-  }
+  //if(DEBUG){
+    //oscListener.draw();
+  //}
 }
