@@ -4,18 +4,6 @@ void oscEvent(OscMessage msg){
 }
 
 final class OscListener{
-  final int N_CHANNELS = 4;
-  final int BUFFER_SIZE = 220;
-  final float MAX_MICROVOLTS = 1.0;
-  final float DISPLAY_SCALE = 200.0;
-  final String[] LABELS = new String[] {
-    "TP9", "FP1", "FP2", "TP10"
-  };
-  
-  float[][] buffer = new float[N_CHANNELS][BUFFER_SIZE];
-  int pointer = 0;
-  float[] offsetX = new float[N_CHANNELS];
-  float[] offsetY = new float[N_CHANNELS];
 
   
   OscListener(){
