@@ -8,7 +8,7 @@ void keyPressed(){
 }
 
 void keyReleased(){
-  //キーが話されたとき
+  //キーが離されたとき
   System.out.println("released "+key);
 }
 
