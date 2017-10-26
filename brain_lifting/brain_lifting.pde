@@ -25,6 +25,9 @@ void setup(){
   smooth();
 }
 
+void mouseClicked () {
+  if (system.gameover) system.reset();
+}
 void draw(){
   system.run();
   //if(DEBUG){
