@@ -46,9 +46,6 @@ void setup(){
   secondApplet = new SecondApplet(this);
 }
 
-void mouseClicked () {
-  if (system.gameover) system.reset();
-}
 void draw(){
   system.run();
 }
