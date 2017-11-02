@@ -1,4 +1,3 @@
-
 void oscEvent(OscMessage msg){
   oscListener.listen(msg);
 }
@@ -37,7 +36,8 @@ final class OscListener{
         buffer[ch][pointer] = data;
       }
       pointer = (pointer + 1) % BUFFER_SIZE;
-    }    
+    }
+    system.set_brain_param(1);  
   }
   
   void draw(){

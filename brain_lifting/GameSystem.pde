@@ -22,6 +22,7 @@ final class GameSystem{
   int vrate=0;
   int sidemove=0;
   int lengthmove=0;
+  int brain_param = 0; //0〜10
   
   GameSystem(){
     font= createFont("Arial",28.0);
@@ -217,5 +218,8 @@ final class GameSystem{
   }
 }
   
+  void set_brain_param(int param){
+    brain_param = param;
+  }
  
 }
