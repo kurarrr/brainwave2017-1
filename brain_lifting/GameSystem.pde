@@ -46,8 +46,8 @@ final class GameSystem{
     for (int row=0;row<1000;row++) {
       for (int col=0;col<6;col++) {
         tiles[row][col]=1;
-        if (row>20 && random(0,10)>8) tiles[row][col]=0;
-        if (row>30 && random(0,100)>95) tiles[row][col]=2;
+        if (row>20 && random(0,10)>7) tiles[row][col]=0;
+        if (row>30 && random(0,100)>94) tiles[row][col]=2;
         if (row>30 && random(0,100)>98) tiles[row][col]=3;
         if (row>60 && random(0,100)>99) tiles[row][col]=4;
       }
