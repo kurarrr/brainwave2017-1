@@ -20,10 +20,12 @@ final class GameSystem{
   int time=0;
   int frame=0;
   int vrate=0;
-  int sidemove=0;
-  int lengthmove=0;
+  float sidemove=0;
+  float lengthmove=0;
   int brain_param = 0; //0〜10
-  
+  float xx = 0;
+  float yy = 0;
+  float dy =0;
   GameSystem(){
     font= createFont("Arial",28.0);
     textFont(font);//フォント諸々
@@ -39,7 +41,7 @@ final class GameSystem{
   
   void reset() {
   // reset game
-    tiles=new int[1000][6];
+    tiles=new int[5000][6];
     gotbonus =new boolean[1000][6];
     for (int row=0;row<1000;row++) {
       for (int col=0;col<6;col++) {
@@ -86,9 +88,12 @@ final class GameSystem{
     }
   
     // ball position
-  
-    float xx = 60-mouseX/4.25; //left-right
-    float yy = ypos+60+((512.0-mouseY)/5.0); // front-back
+    //float xx = 100;
+    //float xx =  60-mouseX/4.25; //left-right
+    xx = xx- sidemove;
+    //yy = ypos+60+((512.0-mouseY)/5.0); // front-back
+    dy=dy+lengthmove;
+    yy= ypos +dy+50;
     float zz = BALL_R/2.0+(BOUNCE_HEIGHT*(float)Math.abs(Math.sin(frameCount/BOUNCE_STRIDE))); // up-down  
 
     // draw tiles, but only those in a visible subset
@@ -143,7 +148,8 @@ final class GameSystem{
     rotateX((PI*3.0/2.2));
     text("LIVES",0,-20);
     text(lives+"",0,0);
-    text(frameCount,0,20);//test
+    text(xx,0,-40);
+    text(yy,0,-60);
     popMatrix();
   
     // on the ground? if so, check for 'collisions'
