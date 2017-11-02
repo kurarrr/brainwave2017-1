@@ -22,7 +22,7 @@ final class GameSystem{
   float vrate=0;
   float sidemove=0;
   float lengthmove=0;
-  int brain_param = 0; //1〜10
+  int brain_param = 0; //1〜PARAM_MAX_LEVEL
   float xx = 0;
   float yy = 0;
   float dy =0;
