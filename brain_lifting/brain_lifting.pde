@@ -13,6 +13,12 @@ final color GRAPH_COLOR = color(0, 0, 255);
 final color LABEL_COLOR = color(255, 255, 0);
 final int LABEL_SIZE = 21;
 
+final int N_CHANNELS = 4;
+final float EPS = 0.01;
+final float PARAM_MAX_VALUE = 1.0; //alpha_relativeの最大値
+final int PARAM_MAX_LEVEL = 4; //パラメータの最大レベル (1〜PARAM_MAX_LEVEL)
+final int UPDATE_CNT = 10; //パラメータ更新の頻度
+
 final int PORT = 5000;
 OscP5 oscP5 = new OscP5(this, PORT);
 

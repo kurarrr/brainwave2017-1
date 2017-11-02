@@ -3,11 +3,6 @@ void oscEvent(OscMessage msg){
 }
 
 final class OscListener{
-  final int N_CHANNELS = 4;
-  final float EPS = 0.01;
-  final float PARAM_MAX_VALUE = 1.0; //alpha_relativeの最大値
-  final int PARAM_MAX_LEVEL = 10; //パラメータの最大レベル (1〜10)
-  final int UPDATE_CNT = 10; //パラメータ更新の頻度
   int cnt = 0; //カウンター
   float params[] = new float[ UPDATE_CNT];
   
@@ -22,17 +17,20 @@ final class OscListener{
   void listen(OscMessage msg){
     //OscMessageを加工してゲームのパラメータにしてsystemの変数に渡す
     float data,data_sum;
-    data_sum = 0.0;
     if(msg.checkAddrPattern("/muse/elements/alpha_relative")){
+      data_sum = 0.0;
       for(int ch = 0; ch < N_CHANNELS; ch++){
         data = msg.get(ch).floatValue();
         data = Math.min(data,PARAM_MAX_VALUE - EPS); //大き過ぎたら丸める
         data_sum += data;
       }
-    }
-    params[cnt] = data_sum;
+      data_sum = (float)(PARAM_MAX_VALUE * N_CHANNELS) /2.0;
 
-    if(++cnt == UPDATE_CNT){
+    }else{
+      data_sum = (float)(PARAM_MAX_VALUE * N_CHANNELS) /2.0;
+    }
+    params[cnt++] = data_sum;
+    if(cnt == UPDATE_CNT){
       cnt = 0;
       int val_send;
       float data_ave = 0.0;
