@@ -4,67 +4,55 @@ void oscEvent(OscMessage msg){
 
 final class OscListener{
   final int N_CHANNELS = 4;
-  final int BUFFER_SIZE = 220;
-  final float MAX_MICROVOLTS = 1.0;
-  final float DISPLAY_SCALE = 200.0;
-  final String[] LABELS = new String[] {
-    "TP9", "FP1", "FP2", "TP10"
-  };
-  
-  float[][] buffer = new float[N_CHANNELS][BUFFER_SIZE];
-  int pointer = 0;
-  float[] offsetX = new float[N_CHANNELS];
-  float[] offsetY = new float[N_CHANNELS];
-
+  final float EPS = 0.01;
+  final float PARAM_MAX_VALUE = 1.0; //alpha_relativeの最大値
+  final int PARAM_MAX_LEVEL = 10; //パラメータの最大レベル (1〜10)
+  final int UPDATE_CNT = 10; //パラメータ更新の頻度
+  int cnt = 0; //カウンター
+  float params[] = new float[ UPDATE_CNT];
   
   OscListener(){
     //コンストラクタ
-      for(int ch = 0; ch < N_CHANNELS; ch++){
-        offsetX[ch] = (width / N_CHANNELS) * ch + 15;
-        offsetY[ch] = height / 2;
-      }
+    cnt = 0;
+    for(int i = 0;i<UPDATE_CNT;i++){
+      params[i] = 0.0;
+    }
   }
  
   void listen(OscMessage msg){
     //OscMessageを加工してゲームのパラメータにしてsystemの変数に渡す
-    float data;
+    float data,data_sum;
+    data_sum = 0.0;
     if(msg.checkAddrPattern("/muse/elements/alpha_relative")){
       for(int ch = 0; ch < N_CHANNELS; ch++){
         data = msg.get(ch).floatValue();
-        //data = (data - (MAX_MICROVOLTS / 2)) / (MAX_MICROVOLTS / 2); // -1.0 1.0
-        //println(data);
-        buffer[ch][pointer] = data;
+        data = Math.min(data,PARAM_MAX_VALUE - EPS); //大き過ぎたら丸める
+        data_sum += data;
       }
-      pointer = (pointer + 1) % BUFFER_SIZE;
     }
-    system.set_brain_param(1);  
+    params[cnt] = data_sum;
+
+    if(++cnt == UPDATE_CNT){
+      cnt = 0;
+      int val_send;
+      float data_ave = 0.0;
+      for(int i = 0;i<UPDATE_CNT;i++){
+        data_ave += params[i];
+      }
+      data_ave /= ((float)UPDATE_CNT * (float)N_CHANNELS * PARAM_MAX_VALUE ); //averageを[0,1)で正規化
+      val_send = (int)(data_ave * (float)PARAM_MAX_LEVEL) + 1;
+      
+      system.set_brain_param(val_send);
+    }
   }
   
   void draw(){
-    //デバッグ用
-    //脳波の描画が必要なときに呼ぶ
-   float x1, y1, x2, y2;
-    background(BG_COLOR);
-    for(int ch = 0; ch < N_CHANNELS; ch++){
-      for(int t = 0; t < BUFFER_SIZE; t++){
-        stroke(GRAPH_COLOR);
-        x1 = offsetX[ch] + t;
-        y1 = offsetY[ch] + buffer[ch][(t + pointer) % BUFFER_SIZE] * DISPLAY_SCALE;
-        x2 = offsetX[ch] + t + 1;
-        y2 = offsetY[ch] + buffer[ch][(t + 1 + pointer) % BUFFER_SIZE] * DISPLAY_SCALE;
-        line(x1, y1, x2, y2);
-      }
-      stroke(AXIS_COLOR);
-      x1 = offsetX[ch];
-      y1 = offsetY[ch];
-      x2 = offsetX[ch] + BUFFER_SIZE;
-      y2 = offsetY[ch];
-      line(x1, y1, x2, y2);
+    if(DEBUG){
+      System.out.println("param = " + system.brain_param + ", cnt = " + cnt);
     }
-    fill(LABEL_COLOR);
-    textSize(LABEL_SIZE);
-    for(int ch = 0; ch < N_CHANNELS; ch++){
-      text(LABELS[ch], offsetX[ch], offsetY[ch]);
-    }
+    //textSize(LABEL_SIZE);
+    //for(int ch = 0; ch < N_CHANNELS; ch++){
+    //  text(LABELS[ch], offsetX[ch], offsetY[ch]);
+    //}
   }
 }

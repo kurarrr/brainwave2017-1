@@ -32,7 +32,7 @@ void mouseClicked () {
 }
 void draw(){
   system.run();
-  //if(DEBUG){
-    //oscListener.draw();
-  //}
+  if(DEBUG){
+    oscListener.draw();
+  }
 }
