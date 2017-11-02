@@ -1,7 +1,11 @@
 void keyPressed(){
   //キーが入力されたとき
-  if(currentKeyInput.lastkey != key){
-    System.out.println("pressing "+key);
+  if (key == CODED) {      // コード化されているキーが押された
+    if (keyCode == RIGHT) {    // キーコードを判定
+          x += speed;
+    } else if (keyCode == LEFT) {
+           x -= speed;
+    }
   }
   
   currentKeyInput.lastkey = key;

@@ -19,6 +19,10 @@ final class GameSystem{
   int flashCounter;
   int time=0;
   int frame=0;
+  int vrate=0;
+  int sidemove=0;
+  int lengthmove=0;
+  
   GameSystem(){
     font= createFont("Arial",28.0);
     textFont(font);//フォント諸々
@@ -59,8 +63,8 @@ final class GameSystem{
       frame=0;
     }
     
-    int vrate=floor(time/20)+1;
-    int ypos=(frameCount%20000)*vrate;
+    vrate=vrate+floor(time/20)+1;
+    int ypos=vrate;
   
     camera(0,ypos,hite,0,(ypos+400),0,0,-1,0);
     ambientLight(210,220,200);
@@ -84,7 +88,7 @@ final class GameSystem{
   
     float xx = 60-mouseX/4.25; //left-right
     float yy = ypos+60+((512.0-mouseY)/5.0); // front-back
-    float zz = BALL_R/2.0+(BOUNCE_HEIGHT*(float)Math.abs(Math.sin(vrate*frameCount/BOUNCE_STRIDE))); // up-down  
+    float zz = BALL_R/2.0+(BOUNCE_HEIGHT*(float)Math.abs(Math.sin(frameCount/BOUNCE_STRIDE))); // up-down  
 
     // draw tiles, but only those in a visible subset
   
