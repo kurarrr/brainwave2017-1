@@ -27,6 +27,8 @@ void setup(){
 
 void mouseClicked () {
   if (system.gameover) system.reset();
+  system.time=0;
+  system.frame=0;
 }
 void draw(){
   system.run();

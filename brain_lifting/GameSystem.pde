@@ -17,7 +17,8 @@ final class GameSystem{
   boolean showFlash=false;
   int FOR_FRAMES=10;
   int flashCounter;
-  
+  int time=0;
+  int frame=0;
   GameSystem(){
     font= createFont("Arial",28.0);
     textFont(font);//フォント諸々
@@ -52,7 +53,14 @@ final class GameSystem{
   }
   
   void run(){
-    int ypos=(frameCount%20000);
+    frame++;;
+    if(frame==60){
+      time++;
+      frame=0;
+    }
+    
+    int vrate=floor(time/20)+1;
+    int ypos=(frameCount%20000)*vrate;
   
     camera(0,ypos,hite,0,(ypos+400),0,0,-1,0);
     ambientLight(210,220,200);
@@ -76,7 +84,7 @@ final class GameSystem{
   
     float xx = 60-mouseX/4.25; //left-right
     float yy = ypos+60+((512.0-mouseY)/5.0); // front-back
-    float zz = BALL_R/2.0+(BOUNCE_HEIGHT*(float)Math.abs(Math.sin(frameCount/BOUNCE_STRIDE))); // up-down  
+    float zz = BALL_R/2.0+(BOUNCE_HEIGHT*(float)Math.abs(Math.sin(vrate*frameCount/BOUNCE_STRIDE))); // up-down  
 
     // draw tiles, but only those in a visible subset
   
@@ -130,6 +138,7 @@ final class GameSystem{
     rotateX((PI*3.0/2.2));
     text("LIVES",0,-20);
     text(lives+"",0,0);
+    text(frameCount,0,20);//test
     popMatrix();
   
     // on the ground? if so, check for 'collisions'
