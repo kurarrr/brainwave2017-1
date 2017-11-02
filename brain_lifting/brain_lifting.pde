@@ -24,7 +24,7 @@ void setup(){
   system = new GameSystem();
   oscListener = new OscListener();
   smooth();
-  outfile = createWriter("pos_t2.txt");
+  outfile = createWriter("data(eye_closed).txt");
 }
 
 void draw(){

@@ -30,14 +30,18 @@ final class OscListener{
     //OscMessageを加工してゲームのパラメータにしてsystemの変数に渡す
     float data;
     if(msg.checkAddrPattern("/muse/elements/alpha_relative")){
-      for(int ch = 0; ch < N_CHANNELS; ch++){
-        data = msg.get(ch).floatValue();
-        outfile.print(data+" ");
-        //data = (data - (MAX_MICROVOLTS / 2)) / (MAX_MICROVOLTS / 2); // -1.0 1.0
-        //println(data);
-        buffer[ch][pointer] = data;
-      }
+      if(DEBUG){
+        for(int ch = 0; ch < N_CHANNELS; ch++){
+          data = msg.get(ch).floatValue();
+          outfile.print(data+",");
+          //data = (data - (MAX_MICROVOLTS / 2)) / (MAX_MICROVOLTS / 2); // -1.0 1.0
+          //println(data);
+          buffer[ch][pointer] = data;
+        }else{
+          data = 
+        }
       outfile.println("");
+    }  
       pointer = (pointer + 1) % BUFFER_SIZE;
     }    
   }
