@@ -65,8 +65,18 @@ final class GameSystem{
       time++;
       frame=0;
     }
-    
-    vrate=vrate+floor(time/20)+1;
+    float brain_rate=0;
+    if(brain_param==1){
+      brain_rate=2;
+    }else if(brain_param==2){
+      brain_rate=1;
+    }else if(brain_param==3){
+      brain_rate=0.5;
+    }else if(brain_param==4){
+      brain_rate=0;
+    }
+      
+    vrate=vrate+floor(time/20)+1+brain_rate;
     float ypos=vrate;
   
     camera(0,ypos,hite,0,(ypos+400),0,0,-1,0);
