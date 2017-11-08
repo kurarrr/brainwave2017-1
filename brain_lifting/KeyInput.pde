@@ -10,8 +10,7 @@ void keyPressed(){
     } else if (keyCode==DOWN){
         system.lengthmove =-1.5;
     }
-  }
-  
+  }  
   currentKeyInput.lastkey = key;
 }
 

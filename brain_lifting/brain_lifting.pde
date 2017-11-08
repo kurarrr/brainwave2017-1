@@ -1,5 +1,6 @@
 import oscP5.*;
 import netP5.*;
+PrintWriter outfile;
 
 KeyInput currentKeyInput;
 GameSystem system;
@@ -29,6 +30,7 @@ void setup(){
   system = new GameSystem();
   oscListener = new OscListener();
   smooth();
+  outfile = createWriter("data(eye_closed).txt");
 }
 
 void mouseClicked () {
@@ -41,4 +43,5 @@ void draw(){
   if(DEBUG){
     oscListener.draw();
   }
+
 }
