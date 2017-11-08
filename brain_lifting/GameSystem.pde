@@ -75,7 +75,7 @@ final class GameSystem{
     }else if(brain_param==4){
       brain_rate=0;
     }
-      
+    float aaa=floor(time/20)+1+brain_rate;
     vrate=vrate+floor(time/20)+1+brain_rate;
     float ypos=vrate;
   
@@ -155,6 +155,7 @@ final class GameSystem{
     rotateX((PI*3.0/2.2));
     text("LIVES",0,-20);
     text(lives+"",0,0);
+    text("v: "+aaa,0,-40);
     popMatrix();
   
     // on the ground? if so, check for 'collisions'

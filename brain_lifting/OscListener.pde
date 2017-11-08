@@ -18,14 +18,13 @@ final class OscListener{
     //OscMessageを加工してゲームのパラメータにしてsystemの変数に渡す
     float data,data_sum;
     if(msg.checkAddrPattern("/muse/elements/alpha_relative")){
+      if(DEBUG) System.out.println("rawdata = "+msg.get(0).floatValue());
       data_sum = 0.0;
       for(int ch = 0; ch < N_CHANNELS; ch++){
         data = msg.get(ch).floatValue();
         data = Math.min(data,PARAM_MAX_VALUE - EPS); //大き過ぎたら丸める
         data_sum += data;
       }
-      data_sum = (float)(PARAM_MAX_VALUE * N_CHANNELS) /2.0;
-
     }else{
       data_sum = (float)(PARAM_MAX_VALUE * N_CHANNELS) /2.0;
     }
@@ -38,6 +37,7 @@ final class OscListener{
         data_ave += params[i];
       }
       data_ave /= ((float)UPDATE_CNT * (float)N_CHANNELS * PARAM_MAX_VALUE ); //averageを[0,1)で正規化
+      if(DEBUG) System.out.println("data_ave = "+data_ave);
       val_send = (int)(data_ave * (float)PARAM_MAX_LEVEL) + 1;
       
       system.set_brain_param(val_send);

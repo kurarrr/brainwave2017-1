@@ -16,9 +16,9 @@ final int LABEL_SIZE = 21;
 
 final int N_CHANNELS = 4;
 final float EPS = 0.01;
-final float PARAM_MAX_VALUE = 0.6; //alpha_relativeの最大値
+final float PARAM_MAX_VALUE = 0.5; //alpha_relativeの最大値
 final int PARAM_MAX_LEVEL = 4; //パラメータの最大レベル (1〜PARAM_MAX_LEVEL)
-final int UPDATE_CNT = 50; //パラメータ更新の頻度
+final int UPDATE_CNT = 100; //パラメータ更新の頻度
 
 final int PORT = 5000;
 OscP5 oscP5 = new OscP5(this, PORT);
