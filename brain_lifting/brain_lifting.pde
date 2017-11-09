@@ -19,8 +19,8 @@ final color LABEL_COLOR = color(255, 255, 0);
 final int LABEL_SIZE = 21;
 
 final int N_CHANNELS = 4;
-final float EPS = 0.01;
-final float PARAM_MAX_VALUE = 0.25; //alpha_relativeの最大値
+final float EPS = 0.0001;
+final float PARAM_MAX_VALUE = 0.40; //alpha_relativeの最大値
 final int PARAM_MAX_LEVEL = 4; //パラメータの最大レベル (1〜PARAM_MAX_LEVEL)
 final int UPDATE_CNT = 100; //パラメータ更新の頻度
 

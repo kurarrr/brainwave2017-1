@@ -41,7 +41,7 @@ final class GameSystem{
   
   void reset() {
   // reset game
-    tiles=new int[5000][6];
+    tiles=new int[1000][6];
     gotbonus =new boolean[1000][6];
     for (int row=0;row<1000;row++) {
       for (int col=0;col<6;col++) {
@@ -60,7 +60,7 @@ final class GameSystem{
   }
   
   void run(){
-    frame++;;
+    frame++;
     if(frame==60){
       time++;
       frame=0;
@@ -156,6 +156,7 @@ final class GameSystem{
     text("LIVES",0,-20);
     text(lives+"",0,0);
     text("v: "+aaa,0,-40);
+    text("time:"+time,0,-60);
     popMatrix();
   
     // on the ground? if so, check for 'collisions'
